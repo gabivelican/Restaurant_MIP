@@ -1,0 +1,40 @@
+# Maven
+/target/
+
+# Dependency folders
+/target/dependency/
+
+# Generated files
+*.class
+*.jar
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Exported menu (generated)
+/menu_export.json
+
+# Temporary files
+*.tmp
+
+# Build output
+out/
+
+# IntelliJ
+out/
+
+# Other
+node_modules/
+

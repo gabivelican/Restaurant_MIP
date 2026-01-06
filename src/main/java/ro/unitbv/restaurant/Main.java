@@ -11,11 +11,13 @@ public class Main {
         Product p2 = new Food("Paste Carbonara", 52.5, 400, false);
         Product p3 = new Drink("Limonada", 15.0, 400, false, true);
         Product p4 = new Drink("Apa Plata", 8.0, 500, false, true);
+        Product p5 = new Food ("Steak de Vita", 80.0, 350, false);
 
         menu1.addProduct(p1, Category.MAIN_COURSE);
         menu1.addProduct(p2, Category.MAIN_COURSE);
         menu1.addProduct(p3, Category.SOFT_DRINK);
         menu1.addProduct(p4, Category.SOFT_DRINK);
+        menu1.addProduct(p5, Category.MAIN_COURSE);
 
         menu1.printMenuIteration1("La Andrei");
 
@@ -33,7 +35,7 @@ public class Main {
         order.addProduct(pizza, 2);
         order.addProduct(lemonade, 1);
         order.addProduct(wine, 3);
-        order.addProduct(salad, 0);
+        order.addProduct(salad, 2);
 
 
         System.out.println("Total (with VAT): " + order.calculateTotalWithVAT());
@@ -42,8 +44,8 @@ public class Main {
 
             int hour = java.time.LocalTime.now().getHour();
 
-            // Happy Hour ONLY between 17:00 and 19:00
-            if (hour < 17 || hour >= 19) {
+            // Happy Hour ONLY between 14:00 and 16:00
+            if (hour < 14 || hour >= 16) {
                 return totalWithVAT; // no discount
             }
 
@@ -87,7 +89,7 @@ public class Main {
 
         System.out.println("\nExists product > 100 RON? " + menu3.existsProductMoreExpensiveThan(100));
 
-        menu3.findProductByName("tiramisu")
+        menu3.findProductByName("vin rosu")
                 .ifPresentOrElse(
                         p -> System.out.println("\nFound: " + p),
                         () -> System.out.println("\nNot found")
@@ -119,6 +121,8 @@ public class Main {
 
         menu4.addProduct(new Food("Pizza Margherita", 45, 450, true), Category.MAIN_COURSE);
         menu4.addProduct(new Drink("Limonada", 15, 400, false, true), Category.SOFT_DRINK);
+        menu4.addProduct(new Food ("Steak de Vita", 80, 350, false), Category.MAIN_COURSE);
+        menu4.addProduct(new Food("Tiramisu", 20, 200, true), Category.DESSERT);
 
         menu4.printMenu(config.getRestaurantName());
 

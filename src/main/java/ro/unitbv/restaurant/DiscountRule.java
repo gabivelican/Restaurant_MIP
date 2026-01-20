@@ -1,5 +1,6 @@
 package ro.unitbv.restaurant;
 
+import ro.unitbv.restaurant.model.Product;
 import java.util.Map;
 
 @FunctionalInterface

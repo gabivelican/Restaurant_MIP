@@ -1,0 +1,35 @@
+[
+  {
+    "type": "FOOD",
+    "name": "Pizza Salami",
+    "price": 32.5,
+    "weight": 450,
+    "vegetarian": false
+  },
+  {
+    "type": "FOOD",
+    "name": "Pasta Carbonara",
+    "price": 28.0,
+    "weight": 350,
+    "vegetarian": false
+  },
+  {
+    "type": "FOOD",
+    "name": "Salata Caesar",
+    "price": 25.0,
+    "weight": 300,
+    "vegetarian": true
+  },
+  {
+    "type": "DRINK",
+    "name": "Coca Cola",
+    "price": 8.0,
+    "volume": 330
+  },
+  {
+    "type": "DRINK",
+    "name": "Apa Plata",
+    "price": 5.0,
+    "volume": 500
+  }
+]

@@ -1,26 +1,26 @@
-package ro.unitbv.restaurant;
+package ro.unitbv.restaurant.model;
 
-public final class Drink extends Product {
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 
-    private final int volume;
-    private final boolean alcoholic;
+@Entity
+@DiscriminatorValue("DRINK")
+public class Drink extends Product {
 
-    public Drink(String name, double price, int volume, boolean alcoholic, boolean vegetarian) {
-        super(name, price, vegetarian);
+    private int volume;
+
+    public Drink() {}
+
+    public Drink(String name, double price, int volume) {
+        super(name, price);
         this.volume = volume;
-        this.alcoholic = alcoholic;
     }
 
-    public int getVolume() {
-        return volume;
-    }
-
-    public boolean isAlcoholic() {
-        return alcoholic;
-    }
+    public int getVolume() { return volume; }
+    public void setVolume(int volume) { this.volume = volume; }
 
     @Override
-    public String toString() {
-        return super.toString() + " - Volume: " + volume + "ml";
+    public String getDetails() {
+        return "Volume: " + volume + "ml";
     }
 }

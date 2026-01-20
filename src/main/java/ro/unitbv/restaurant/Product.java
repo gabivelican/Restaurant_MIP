@@ -1,31 +1,77 @@
-package ro.unitbv.restaurant;
+package ro.unitbv.restaurant.model;
 
-public sealed abstract class Product permits Food, Drink, Pizza {
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import jakarta.persistence.*;
+import javafx.beans.property.*;
 
-    private final String name;
-    private final double price;
-    private final boolean vegetarian;
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "product_type", discriminatorType = DiscriminatorType.STRING)
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "type")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Food.class, name = "FOOD"),
+        @JsonSubTypes.Type(value = Drink.class, name = "DRINK")
+})
+public abstract class Product {
 
-    protected Product(String name, double price, boolean vegetarian) {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected Integer id; // <--- MODIFICAT: Integer (obiect), nu int
+
+    @Column(name = "name")
+    protected String name;
+
+    @Column(name = "price")
+    protected double price;
+
+    @Transient
+    private StringProperty nameProperty;
+    @Transient
+    private DoubleProperty priceProperty;
+
+    public Product() {}
+
+    public Product(String name, double price) {
         this.name = name;
         this.price = price;
-        this.vegetarian = vegetarian;
     }
 
-    public String getName() {
-        return name;
+    // --- METODELE NOI CARE LIPSEAU ---
+    public Integer getId() {
+        return id;
     }
 
-    public double getPrice() {
-        return price;
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    // ---------------------------------
+
+    // Getteri și Setteri adaptați pentru JavaFX
+    public String getName() { return nameProperty().get(); }
+    public void setName(String name) {
+        this.name = name;
+        this.nameProperty().set(name);
     }
 
-    public boolean isVegetarian() {
-        return vegetarian;
+    public double getPrice() { return priceProperty().get(); }
+    public void setPrice(double price) {
+        this.price = price;
+        this.priceProperty().set(price);
     }
 
-    @Override
-    public String toString() {
-        return name + " - " + price + " RON";
+    public StringProperty nameProperty() {
+        if (nameProperty == null) nameProperty = new SimpleStringProperty(this, "name", name);
+        return nameProperty;
     }
+
+    public DoubleProperty priceProperty() {
+        if (priceProperty == null) priceProperty = new SimpleDoubleProperty(this, "price", price);
+        return priceProperty;
+    }
+
+    public abstract String getDetails();
 }
